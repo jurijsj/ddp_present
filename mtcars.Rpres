@@ -1,0 +1,88 @@
+Motor Trend Car Road Tests dataset exploratory analysis
+========================================================
+transition:linear
+author: Jurijs Jefimovs
+date: 12/17/2014
+
+Dataset description
+========================================================
+transition:linear
+
+- The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-74 models).
+
+- Usage: mtcars
+
+- Format. A data frame with 32 observations on 11 variables.
+
+Variables description
+========================================================
+transition:linear
+- mpg - Miles/(US) gallon
+- cyl - Number of cylinders
+- disp - Displacement (cu.in.)
+- hp - Gross horsepower
+- drat - Rear axle ratio
+- wt - Weight (lb/1000)
+- qsec - 1/4 mile time
+- vs - V/S
+- am - Transmission (0 = automatic, 1 = manual)
+- gear - Number of forward gears
+- carb - Number of carburetors
+
+Data summary
+========================================================
+transition:linear
+
+```{r, echo=FALSE}
+summary(mtcars)
+```
+
+Pairs plot
+========================================================
+transition:linear
+
+```{r, echo=FALSE}
+pairs(mtcars, main = "mtcars data")
+```
+
+Linear Model
+========================================================
+transition:linear
+
+```{r, echo=FALSE}
+modelFit <- lm(mpg~., data=mtcars)
+modelFit
+```
+
+ANOVA
+========================================================
+transition:linear
+Analysis of variance (or deviance) tables for fitted model.
+```{r, echo=FALSE}
+anova(modelFit)
+```
+
+Conditioning plot
+========================================================
+transition:linear
+Conditioning plot of miles per galon against displacement and number of cylindrs
+
+```{r, echo=FALSE}
+coplot(mpg ~ disp | as.factor(cyl), data = mtcars, panel = panel.smooth, rows = 1)
+```
+
+Conclusion
+========================================================
+transition:linear
+Based on anova test we might higlight 3 variables that realy has influence on cars consumption:
+- Number of cylindrs (cyl)
+- Displacement (disp)
+- Weight (wt)
+
+Transmission (am) variable was added for fun, but it also has some influence.
+Thus 4 variable was chosen for Shiny app.
+
+End
+========================================================
+transition:linear
+Thank you!
